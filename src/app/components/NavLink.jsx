@@ -15,7 +15,7 @@ const NavLink = async () => {
 
   return (
     <nav className="border-t border-gray-100">
-      <div className="mx-auto flex max-w-7xl items-center gap-5 overflow-x-auto px-4 py-3">
+      <div className="mx-auto flex max-w-6xl items-center gap-5 overflow-x-auto px-4 py-3">
         {data?.map((nav) => (
           <Link
             key={nav.slug}

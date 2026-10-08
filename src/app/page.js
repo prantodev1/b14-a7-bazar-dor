@@ -1,5 +1,6 @@
 import Image from "next/image";
 import DateDisplay from "./components/DateDisplay";
+import TodayPriceInc from "./components/TodayPriceInc";
 
 export default function Home() {
   return (
@@ -48,6 +49,7 @@ export default function Home() {
           />
         </div>
       </section>
+      <TodayPriceInc />
     </main>
   );
 }

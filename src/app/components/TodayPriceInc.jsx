@@ -7,31 +7,28 @@ const TodayPriceInc = async () => {
       next: {
         revalidate: 3600,
       },
-    }
+    },
   );
 
   const data = await res.json();
 
   // দাম বেড়েছে
   const increasedProducts = data.filter(
-    (item) => Number(item.today) > Number(item.yesterday)
+    (item) => Number(item.today) > Number(item.yesterday),
   );
 
   // দাম কমেছে
   const decreasedProducts = data.filter(
-    (item) => Number(item.today) < Number(item.yesterday)
+    (item) => Number(item.today) < Number(item.yesterday),
   );
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-8">
-
       {/*দাম বেড়েছে */}
       <div className="mb-4 flex items-center gap-2">
         <span className="text-red-700">▲</span>
 
-        <h2 className="text-xl font-bold text-gray-800">
-          আজ দাম বেড়েছে
-        </h2>
+        <h2 className="text-xl font-bold text-gray-800">আজ দাম বেড়েছে</h2>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -50,7 +47,6 @@ const TodayPriceInc = async () => {
             >
               {/* Product */}
               <div className="flex items-center gap-3">
-
                 {/* Emoji */}
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#f1f6f2] text-2xl">
                   {item.image}
@@ -58,24 +54,18 @@ const TodayPriceInc = async () => {
 
                 {/* Name */}
                 <div>
-                  <h3 className="font-semibold text-gray-800">
-                    {item.nameBn}
-                  </h3>
+                  <h3 className="font-semibold text-gray-800">{item.nameBn}</h3>
 
                   <p className="text-xs text-gray-500">
                     {item.unit || "প্রতি কেজি"}
                   </p>
                 </div>
-
               </div>
 
               {/* Price */}
               <div className="mt-4 flex items-end justify-between">
-
                 <div>
-                  <p className="text-xs text-gray-500">
-                    আজকের দাম
-                  </p>
+                  <p className="text-xs text-gray-500">আজকের দাম</p>
 
                   <p className="text-lg font-bold text-gray-900">
                     {item.today} টাকা
@@ -86,22 +76,18 @@ const TodayPriceInc = async () => {
                 <span className="rounded-full bg-red-50 px-2.5 py-1 text-xs font-medium text-red-600">
                   ▲ {percentage.toFixed(1)}%
                 </span>
-
               </div>
             </div>
           );
         })}
       </div>
 
-
       {/* দাম কমেছে */}
 
       <div className="mb-4 mt-10 flex items-center gap-2">
         <span className="text-green-700">▼</span>
 
-        <h2 className="text-xl font-bold text-gray-800">
-          আজ দাম কমেছে
-        </h2>
+        <h2 className="text-xl font-bold text-gray-800">আজ দাম কমেছে</h2>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -120,7 +106,6 @@ const TodayPriceInc = async () => {
             >
               {/* Product */}
               <div className="flex items-center gap-3">
-
                 {/* Emoji */}
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#f1f6f2] text-2xl">
                   {item.image}
@@ -128,24 +113,18 @@ const TodayPriceInc = async () => {
 
                 {/* Name */}
                 <div>
-                  <h3 className="font-semibold text-gray-800">
-                    {item.nameBn}
-                  </h3>
+                  <h3 className="font-semibold text-gray-800">{item.nameBn}</h3>
 
                   <p className="text-xs text-gray-500">
                     {item.unit || "প্রতি কেজি"}
                   </p>
                 </div>
-
               </div>
 
               {/* Price */}
               <div className="mt-4 flex items-end justify-between">
-
                 <div>
-                  <p className="text-xs text-gray-500">
-                    আজকের দাম
-                  </p>
+                  <p className="text-xs text-gray-500">আজকের দাম</p>
 
                   <p className="text-lg font-bold text-gray-900">
                     {item.today} টাকা
@@ -156,13 +135,85 @@ const TodayPriceInc = async () => {
                 <span className="rounded-full bg-green-50 px-2.5 py-1 text-xs font-medium text-green-600">
                   ▼ {percentage.toFixed(1)}%
                 </span>
-
               </div>
             </div>
           );
         })}
       </div>
+      {/* সব পণ্য */}
+      <div className="mt-10">
+        {/* Heading */}
+        <div className="mb-4">
+          <h2 className="text-xl font-bold text-gray-800">সব পণ্য</h2>
 
+          <p className="mt-1 text-sm text-gray-500">
+            মোট {data.length}টি পণ্য দেখানো হচ্ছে
+          </p>
+        </div>
+
+        {/* Products */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {data.map((item) => {
+            const today = Number(item.today);
+            const yesterday = Number(item.yesterday);
+
+            const percentage =
+              yesterday > 0 ? ((today - yesterday) / yesterday) * 100 : 0;
+
+            return (
+              <div
+                key={item.id}
+                className="rounded-2xl border border-[#dce5de] bg-white p-3 shadow-sm"
+              >
+                {/* Product top */}
+                <div className="flex items-center gap-3">
+                  {/* Emoji */}
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#f1f6f2] text-2xl">
+                    {item.image}
+                  </div>
+
+                  {/* Product name */}
+                  <div>
+                    <h3 className="font-semibold text-gray-800">
+                      {item.nameBn}
+                    </h3>
+
+                    <p className="text-xs text-gray-500">
+                      {item.unit || "প্রতি কেজি"}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Price */}
+                <div className="mt-4 flex items-end justify-between">
+                  <div>
+                    <p className="text-xs text-gray-500">আজকের দাম</p>
+
+                    <p className="text-lg font-bold text-gray-900">
+                      {item.today} টাকা
+                    </p>
+                  </div>
+
+                  {/* Price change */}
+                  {percentage > 0 ? (
+                    <span className="rounded-full bg-red-50 px-2.5 py-1 text-xs font-medium text-red-600">
+                      ▲ {percentage.toFixed(1)}%
+                    </span>
+                  ) : percentage < 0 ? (
+                    <span className="rounded-full bg-green-50 px-2.5 py-1 text-xs font-medium text-green-600">
+                      ▼ {Math.abs(percentage).toFixed(1)}%
+                    </span>
+                  ) : (
+                    <span className="rounded-full bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-500">
+                      — 0.0%
+                    </span>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 };

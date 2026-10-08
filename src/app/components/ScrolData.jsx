@@ -27,7 +27,7 @@ const ScrolData = async () => {
         {data?.map((item) => (
           <div
             key={item.id || item.nameBn}
-            className="mx-6 flex items-center gap-2 text-sm" >
+            className="mx-4 flex items-center gap-2 text-sm" >
             <span>{item.categoryIcon}</span>
             <span className="font-medium">
               {item.nameBn}

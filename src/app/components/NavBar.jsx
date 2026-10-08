@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import NavLink from "./NavLink";
 import DateDisplay from "./DateDisplay";
+import Link from "next/link";
 
 const NavBar = () => {
   return (
@@ -11,6 +12,7 @@ const NavBar = () => {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-3 py-2 sm:px-4">
 
         {/* Logo + Brand */}
+        <Link href={'/'}>
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <Image
             src="/logo-icon.png"
@@ -30,6 +32,8 @@ const NavBar = () => {
             </div>
           </div>
         </div>
+        </Link>
+        
 
         {/* Auth Buttons */}
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">

@@ -33,9 +33,16 @@ export default function RootLayout({ children }) {
           <ScrolData />
         </Suspense>
 
-        <main className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
+      <footer className="mx-auto flex max-w-6xl items-center justify-between px-3 py-2">
+  <p className="text-sm font-medium text-gray-700">
+    বাজার দর — প্রয়োজনীয় পণ্যের দাম এক নজরে।
+  </p>
+
+  <p className="text-sm text-gray-700">
+    সকল দাম সম্ভাব্য; বাজার অবস্থার ওপর নির্ভর করে পরিবর্তিত হয়।
+  </p>
+</footer>
       </body>
     </html>
   );
